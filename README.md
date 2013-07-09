@@ -3,7 +3,7 @@ WebRTC Videochat Demo
 
 
 
-![](<public/images/webrtc-logo.png>)
+![](<server/public/images/webrtc-logo.png>)
 
 
 
