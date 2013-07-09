@@ -1,11 +1,22 @@
-var app = require('http').createServer(handler),
-	io = require('socket.io').listen(app);
+var express = require('express')
+  , http 	= require('http')
+  , path  	= require('path')
+  , io 			= require('socket.io');
 
-app.listen(3000);
+var app = express();
+server = http.createServer(app);
+io = io.listen(server);
 
-function handler (req, res) {
-	res.writeHead(200);
-	res.end('not here');
+server.listen(2000);
+
+app.get('/', function (req, res) {
+  res.sendfile(__dirname + '/index.html');
+});
+app.use(express.static(path.join(__dirname, 'public')));
+
+// development only
+if ('development' == app.get('env')) {
+  app.use(express.errorHandler());
 }
 
 var arr = [];
@@ -43,6 +54,7 @@ io.sockets.on('connection', function (socket) {
 	});
 
 	socket.on('reqIce', function(data) {
+		console.log(data);
 		s[socket.id].emit('resIce', data);
 	});
 

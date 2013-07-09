@@ -1,0 +1,13 @@
+{
+  "name": "webrtcdemo",
+  "version": "0.0.1",
+  "author": "Fernando Cea",
+  "description": "WebRTC Demo",
+  "dependencies": {
+    "connect": "*",
+    "express": "~3.3.4"
+  },
+  "engine": {
+    "node": ">=0.10"
+  }
+}
