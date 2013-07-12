@@ -1,0 +1,22 @@
+!!! 5
+head
+    title WebRTC and peerConnection
+    link(rel='stylesheet', href='css/main.css')
+  body
+    header
+      button#req-new new
+      span#group
+      input(type='text', placeholder='group id')
+      button#req-join join
+    .wrapper
+      video#local-video
+      textarea#remote-text(disabled='disabled')
+      textarea#local-text
+      button#send send
+    .wrapper
+      video#remote-video
+    #remote-videos
+    script(src='socket.io/socket.io.js')
+    script(src='js/debug.js')
+    script(src='js/vendor.js')
+    script(src='js/main.js')

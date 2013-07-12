@@ -266,7 +266,8 @@
 	};
 
 	app.init = function() {
-		socket = io.connect('http://127.0.0.1:2000');
+		// socket = io.connect('http://localhost:2002/');
+		socket = io.connect('http://localhost:2000');
 
 		app.rtc.init();
 		app.peer.init();

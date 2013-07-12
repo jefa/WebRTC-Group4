@@ -1,23 +1,59 @@
+// Express modules requirements
 var express = require('express')
-  , http 	= require('http')
-  , path  	= require('path')
-  , io 			= require('socket.io');
+  , http = require('http')
+  , path = require('path')
+  , engines = require('consolidate');
 
+// A wrapper to get a pretty console.log
+// var tools = require('./tools.js');
+
+// One of the most usefull Js library
+var _ = require('underscore');
+
+// Socket.IO module
+var io = require('socket.io');
+
+
+// Some tweakering to get ot to work with Express 3 
 var app = express();
-server = http.createServer(app);
-io = io.listen(server);
+var server = http.createServer(app);
+var io = io.listen(server);
+io.set('log level', 1); 
 
-server.listen(2000);
+/*
+     Express configuation and route(s)
+*/
 
-app.get('/', function (req, res) {
-  res.sendfile(__dirname + '/index.html');
+// Basic Express configuration
+app.configure(function(){
+  app.set('port', process.env.WWW_PORT || 2000);
+  app.set('views', __dirname + '/views');
+  app.set('view engine', 'jade');
+  app.use(express.favicon());
+  app.use(express.logger('dev'));
+  app.use(express.bodyParser());
+  app.use(express.methodOverride());
+  app.use(app.router);
+  app.use(express.static(path.join(__dirname, 'public')));
 });
-app.use(express.static(path.join(__dirname, 'public')));
 
-// development only
-if ('development' == app.get('env')) {
+app.configure('development', function(){
   app.use(express.errorHandler());
-}
+});
+
+// Main route to deliver the static html
+app.get('/',function(req, res){
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  // res.header('Content-Type', 'text/html');
+  res.render('index');
+});
+
+
+// Let's start the server
+server.listen(app.get('port'), function(){
+  console.log("Express server listening on port " + app.get('port'));
+});
 
 var arr = [];
 var channel = 0;
