@@ -4,7 +4,7 @@
 	<link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-
+asdasdasdasd
 	<header>
 		<button id="req-new">new</button>
 		<span id="group"></span>
@@ -25,8 +25,23 @@
 
 	<div id="remote-videos"></div>
 
+	<pre id="editor">function foo(items) {
+    var i;
+    for (i = 0; i &lt; items.length; i++) {
+        alert("Ace Rocks " + items[i]);
+    }
+}</pre>
+
+<script src="ace/src/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+        var editor = ace.edit("editor");
+        editor.setTheme("ace/ace/theme/twilight");
+    editor.getSession().setMode("ace/ace/mode/javascript");
+    </script>
+
+
 	<script src="socket.io/socket.io.js"></script>
-	
+
 	<script src="js/debug.js"></script>
 	<script src="js/vendor.js"></script>
 	<script src="js/main.js"></script>

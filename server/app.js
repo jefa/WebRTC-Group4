@@ -14,11 +14,11 @@ var _ = require('underscore');
 var io = require('socket.io');
 
 
-// Some tweakering to get ot to work with Express 3 
+// Some tweakering to get ot to work with Express 3
 var app = express();
 var server = http.createServer(app);
 var io = io.listen(server);
-io.set('log level', 1); 
+io.set('log level', 1);
 
 /*
      Express configuation and route(s)
@@ -28,7 +28,8 @@ io.set('log level', 1);
 app.configure(function(){
   app.set('port', process.env.WWW_PORT || 2000);
   app.set('views', __dirname + '/views');
-  app.set('view engine', 'jade');
+  app.engine("html", engines.handlebars);
+  app.set('view engine', 'html');
   app.use(express.favicon());
   app.use(express.logger('dev'));
   app.use(express.bodyParser());
